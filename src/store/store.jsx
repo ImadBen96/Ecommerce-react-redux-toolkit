@@ -3,6 +3,7 @@ import sidebarReducer from "./sidebarSlice.jsx";
 import {categoryReducer} from "./categorySlice.jsx";
 import productReducer from "./productSlice";
 import { cartReducer } from "./cartSlice.jsx";
+import SearchReducer from "./searchSlice";
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         sidebar: sidebarReducer,
         product: productReducer,
         cart: cartReducer,
+        search: SearchReducer
 
     }
 });

@@ -36,6 +36,9 @@ body {
   line-height: 1.6;
   font-family: $font-family-bricolage !important;
   color: $clr-black;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column
 }
 
 ul {
@@ -541,6 +544,7 @@ select {
 .main-holder {
   overflow-x: hidden;
 }
+
 
 // liness
 .vert-line {

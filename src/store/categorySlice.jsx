@@ -26,6 +26,16 @@ const categorySlice = createSlice({
        builder.addCase(fetchAsyncCategories.rejected, (state, action) => {
            state.categoriesStatus = STATUS.FAILED;
        });
+       builder.addCase(fetchAsyncProductsOfCategory.pending, (state, action) => {
+           state.categoryProductsStatus = STATUS.LOADING;
+       });
+       builder.addCase(fetchAsyncProductsOfCategory.fulfilled, (state, action) => {
+           state.categoryProductsStatus = STATUS.SUCCEEDED;
+           state.categoryProducts = action.payload;
+       });
+       builder.addCase(fetchAsyncProductsOfCategory.rejected, (state, action) => {
+           state.categoryProductsStatus = STATUS.FAILED;
+       });
    }
 });
 export const fetchAsyncCategories = createAsyncThunk('categories/fetch',async() => {
@@ -34,9 +44,21 @@ export const fetchAsyncCategories = createAsyncThunk('categories/fetch',async() 
 
     return data;
 });
+export const fetchAsyncProductsOfCategory = createAsyncThunk(
+    "category-products/fetch",
+    async (category) => {
+        const response = await fetch(`${BASE_URL}products/category/${category}`);
+        const data = await response.json();
+        return data.products;
+    }
+);
+
 
 export const getAllCategories = (state) => state.category.categories;
-
+export const getAllProductsByCategory = (state) =>
+    state.category.categoryProducts;
+export const getCategoryProductsStatus = (state) =>
+    state.category.categoryProductsStatus;
 export const categoryReducer = categorySlice.reducer;
 
 

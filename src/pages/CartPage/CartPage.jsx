@@ -20,8 +20,34 @@ function CartPage() {
 
     // console.log(totalAmount);
 
+    if (cart.length === 0) {
+        return (
+            <>
+
+                <div className="container my-5">
+                  
+                    <div className="empty-cart flex justify-center align-center flex-column font-manrope">
+                        <i style={ {"fontSize":"112px","color":"#0296bf"} } className="fa-solid fa-cart-shopping"></i>
+                        <span className="fw-6 fs-15 text-gray">
+            Your shopping cart is empty.
+          </span>
+                        <Link to="/" className="shopping-btn bg-orange text-white fw-5">
+                            Go shopping Now
+                        </Link>
+                    </div>
+                    {/*<ToastContainer position="top-right" />*/}
+                </div>
+            </>
+
+        );
+    }
+
+
     return (
         <div className="cart bg-whitesmoke">
+            <header className='header-page'>
+                <h1>Your Shopping Cart</h1>
+            </header>
             <div className="container">
                 <div className="cart-ctable">
                     <div className="cart-chead bg-white">

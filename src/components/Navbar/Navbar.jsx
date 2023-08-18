@@ -9,8 +9,9 @@ import {
     getCartItemsCount,
     getCartTotal
 } from "../../store/cartSlice";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 function Navbar() {
+    const [searchTerm, setSearchTerm] = useState("");
     const dispatch = useDispatch();
     const categories = useSelector(getAllCategories);
     // const temp = useSelector(getSidebarStatus);
@@ -20,6 +21,13 @@ function Navbar() {
     useEffect(() => {
         dispatch(getCartTotal());
     }, [dispatch, cartData]);
+
+
+    const handleSearchTerm = (e) => {
+        e.preventDefault();
+        setSearchTerm(e.target.value);
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-cnt flex align-center">
@@ -50,14 +58,17 @@ function Navbar() {
                                 type="text"
                                 className="form-control fs-14"
                                 placeholder="Search For your items here"
-
+                                onChange={(e) => handleSearchTerm(e)}
                             />
-                            <Link
-                                to=""
-                                className="text-white search-btn flex align-center justify-center"
-                            >
-                                <i className="fa-solid fa-magnifying-glass"></i>
-                            </Link>
+
+                                <Link
+                                    to={searchTerm ? `search/${searchTerm}` : '#'}
+                                    className="text-white search-btn flex align-center justify-center"
+                                >
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                </Link>
+
+
                         </div>
                     </div>
 
